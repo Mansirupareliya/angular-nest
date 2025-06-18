@@ -1,0 +1,17 @@
+<div class="signup-container">
+
+  <form class="signup-form" (submit)="onSignup(); $event.preventDefault()">
+    <h2>Sign Up</h2>
+    <input type="text" [(ngModel)]="name" placeholder="Name" name="name" required />
+    <input type="email" [(ngModel)]="email" placeholder="Email" name="email" required />
+    <input type="password" [(ngModel)]="password" placeholder="Password" name="password" required />
+    <button type="submit">Sign Up</button>
+    
+    <p>Already have an acoount ?
+    <a routerLink = "/login" >Login here</a>
+    </p>
+    <p>Are you forgot password ?
+      <a routerLink= "/reset-password"> Reset password </a>
+    </p>
+  </form>
+</div>
