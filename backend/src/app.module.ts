@@ -8,6 +8,7 @@ import environmentValidation from './auth/config/environment-validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { AuthService } from './services/auth/auth.service';
 
 const ENV = process.env.NODE_ENV;
 @Module({
@@ -35,6 +36,6 @@ const ENV = process.env.NODE_ENV;
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
