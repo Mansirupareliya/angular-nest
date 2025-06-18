@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Injectable,
   RequestTimeoutException,
+  NotFoundException,
   UnauthorizedException,
+  InternalServerErrorException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
@@ -24,12 +26,9 @@ export class AuthService {
      * generate token provider
      */
     private readonly generateTokenProvider: GenerateTokenProvider,
-
   ) {}
 
-  public async signup(
-    signupDto: SignUpDto
-  ) {
+  public async signup(signupDto: SignUpDto) {
     const existUser = await this.userRepository.findOne({
       where: { email: signupDto.email },
     });
@@ -45,36 +44,34 @@ export class AuthService {
     return await this.userRepository.save(newUser);
   }
 
-  public async signIn(loginDto: LoginDto, res) {
-    //find the user using email ID
-    // throw an exception user not password
-    const user = await await this.userRepository.findOne({
-      where: { email: loginDto.email },
-    });
-
-    //compare password to the hash
-    let isEqual: boolean = false;
-
+   public async signIn(signInDto: LoginDto, res): Promise<object> {
     try {
-      isEqual = await this.hashingProvider.comparePassword(
-        loginDto.password,
+       const user = await this.userRepository.findOne({
+      where: { email: signInDto.email },
+    });
+      if (!user) throw new NotFoundException('User not found');
+
+
+      const isEqual = await this.hashingProvider.comparePassword(
+        signInDto.password,
         user.password,
       );
-    } catch  {
-      throw new RequestTimeoutException( {
-        description: 'Could not compare the password',
-      });
+      if (!isEqual) throw new UnauthorizedException('Incorrect Password');
+
+      const token = await this.generateTokenProvider.generateTokens(user);
+      res.cookie('access_token', token, { httpOnly: true });
+
+      return {
+        token,
+      };
+    } catch (error) {
+      console.log(error);
+      if (
+        error instanceof NotFoundException ||
+        error instanceof UnauthorizedException
+      )
+        throw error;
+      throw new InternalServerErrorException('Sign-in failed');
     }
-
-    if (!isEqual) {
-      throw new UnauthorizedException('Incorrect Password');
-    }
-
-  const token = await this.generateTokenProvider.generateTokens(user);
-
-    res.cookie('access_token', token, {
-      httpOnly: true,
-    });
-
-    res.send('Login Successful!');  }
+  }
 }
