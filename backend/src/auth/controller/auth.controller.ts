@@ -27,7 +27,7 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  @Auth(AuthType.Bearer)
+  @Auth(AuthType.None)
   public resetPasssword(@Body() resetPasswordDto: ResetPasswordDto){
     return this. authService.resetpassword(resetPasswordDto);
   }

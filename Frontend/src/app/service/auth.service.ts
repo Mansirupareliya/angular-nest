@@ -20,4 +20,12 @@ export class AuthService {
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, data);
   }
+
+  resetPassword(data: {
+    email: string;
+    newPassword: string;
+    confirmPassword: string;
+  }) {
+    return this.http.post(`${this.baseUrl}/reset-password`, data);
+  }
 }
