@@ -13,6 +13,7 @@ import { SignUpDto } from '../dto/signup.dto';
 import { HashingProvider } from './hashing.provider';
 import { GenerateTokenProvider } from './generate-token.provider';
 import { LoginDto } from '../dto/login.dto';
+import { ResetPasswordDto } from '../dto/resetpassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -73,5 +74,24 @@ export class AuthService {
         throw error;
       throw new InternalServerErrorException('Sign-in failed');
     }
+  }
+
+  public async resetpassword(resetPasswordDto: ResetPasswordDto)
+  {
+    const { email, newPassword,confirmPassword} = resetPasswordDto;
+
+    if(newPassword!=confirmPassword){
+      throw new BadRequestException('Password do not match');
+    }
+    const user = await this. userRepository. findOne({where:{email}})
+
+    if(!user){
+      throw new NotFoundException('User not found');
+    
+    }
+    user.password = await this.hashingProvider.hashPassword(newPassword);
+    await this.userRepository.save(user);
+
+    return {message : 'password updated successfully'};
   }
 }

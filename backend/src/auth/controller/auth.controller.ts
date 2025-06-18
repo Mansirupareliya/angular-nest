@@ -5,6 +5,7 @@ import { LoginDto } from '../dto/login.dto';
 import { Auth } from '../decorator/auth.decorator';
 import { AuthType } from '../enum/auth-type.enum';
 import { Response } from '@nestjs/common';
+import { ResetPasswordDto } from '../dto/resetpassword.dto';
 
 @Controller('api/user')
 export class AuthController {
@@ -23,5 +24,11 @@ export class AuthController {
     @Response({ passthrough: true }) res,
   ) {
     return this.authService.signIn(signInDto, res);
+  }
+
+  @Post('reset-password')
+  @Auth(AuthType.Bearer)
+  public resetPasssword(@Body() resetPasswordDto: ResetPasswordDto){
+    return this. authService.resetpassword(resetPasswordDto);
   }
 }
