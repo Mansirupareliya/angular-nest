@@ -28,7 +28,7 @@ export class AuthService {
   ) {}
 
   public async signup(
-    signupDto: SignUpDto,
+    signupDto: SignUpDto
   ) {
     const existUser = await this.userRepository.findOne({
       where: { email: signupDto.email },
@@ -45,7 +45,7 @@ export class AuthService {
     return await this.userRepository.save(newUser);
   }
 
-  public async signIn(loginDto: LoginDto) {
+  public async signIn(loginDto: LoginDto, res) {
     //find the user using email ID
     // throw an exception user not password
     const user = await await this.userRepository.findOne({
@@ -70,6 +70,11 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect Password');
     }
 
-    return await this.generateTokenProvider.generateTokens(user);
-  }
+  const token = await this.generateTokenProvider.generateTokens(user);
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
+    });
+
+    res.send('Login Successful!');  }
 }

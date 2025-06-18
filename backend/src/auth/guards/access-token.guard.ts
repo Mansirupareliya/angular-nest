@@ -29,7 +29,7 @@ export class AccessTokenGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
 
     //Extract the token from header
-    const token = this.extractRequestFromHeader(request);
+   const token = request.cookies?.access_token.accessToken;
     //validate the token
     if (!token) {
       throw new UnauthorizedException();
