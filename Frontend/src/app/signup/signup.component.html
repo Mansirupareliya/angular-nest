@@ -1,17 +1,22 @@
 <div class="signup-container">
+  <div class="signup-image"></div>
 
   <form class="signup-form" (submit)="onSignup(); $event.preventDefault()">
     <h2>Sign Up</h2>
-    <input type="text" [(ngModel)]="name" placeholder="Name" name="name" required />
-    <input type="email" [(ngModel)]="email" placeholder="Email" name="email" required />
-    <input type="password" [(ngModel)]="password" placeholder="Password" name="password" required />
-    <button type="submit">Sign Up</button>
-    
-    <p>Already have an acoount ?
-    <a routerLink = "/login" >Login here</a>
+
+    <input pInputText type="text" [(ngModel)]="name" placeholder="Name" name="name" required />
+    <input pInputText type="email" [(ngModel)]="email" placeholder="Email" name="email" required />
+    <p-password [(ngModel)]="password" placeholder="Password" name="password" toggleMask="true" feedback="false" required></p-password>
+
+    <button pButton type="submit" label="Sign Up" class="p-button-primary"></button>
+
+    <p>
+      Already have an account?
+      <a routerLink="/login">Login here</a>
     </p>
-    <p>Are you forgot password ?
-      <a routerLink= "/reset-password"> Reset password </a>
+    <p>
+      Forgot your password?
+      <a routerLink="/reset-password">Reset password</a>
     </p>
   </form>
 </div>
