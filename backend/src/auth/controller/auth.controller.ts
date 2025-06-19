@@ -31,4 +31,11 @@ export class AuthController {
   public resetPasssword(@Body() resetPasswordDto: ResetPasswordDto){
     return this. authService.resetpassword(resetPasswordDto);
   }
+
+  @Post('logout')
+  @Auth(AuthType.Bearer)
+  public logout(@Response({passthrough:true})res){
+    res.clearCookie('access_token');
+    return {message : 'user logged out successfully'};
+  }
 }
