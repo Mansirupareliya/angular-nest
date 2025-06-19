@@ -1,0 +1,61 @@
+.navbar {
+  background: linear-gradient(to right, #004466, #0077b6);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid #0096c7;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-actions button {
+  margin-left: 1rem;
+  font-weight: 600;
+  min-width: 120px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.p-dialog .p-field {
+  margin-bottom: 1.5rem;
+}
+
+.p-dialog label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.p-dialog input {
+  width: 100%;
+}
+
+.p-button-success {
+  background-color: #58b0ca;
+  border: none;
+}
+
+.p-button-success:hover {
+  background-color: #1a728d;
+}
+
+.p-button-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.p-button-danger:hover {
+  background-color: #c82333;
+}

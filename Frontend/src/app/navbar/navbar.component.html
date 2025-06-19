@@ -1,0 +1,19 @@
+<p-toast></p-toast>
+
+<div class="navbar">
+  <div class="navbar-brand">🚀 MyApp</div>
+  <div class="navbar-actions">
+    <button pButton icon="pi pi-user-edit" label="Update User" class="p-button-success" (click)="openUpdateDialog()"></button>
+    <button pButton icon="pi pi-sign-out" label="Logout" class="p-button-danger" (click)="logout()"></button>
+  </div>
+</div>
+
+<p-dialog header="Update user" [(visible)]="showDialog" [modal]="true" [closable]="true" [style]="{width: '350px'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="name">New Name</label>
+      <input id="name" type="text" pInputText [(ngModel)]="name" />
+    </div>
+    <button pButton type="button" label="Update" icon="pi pi-check" class="p-button-success p-mt-2" (click)="updateUser()"></button>
+  </div>
+</p-dialog>

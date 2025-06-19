@@ -28,4 +28,18 @@ export class AuthService {
   }) {
     return this.http.post(`${this.baseUrl}/reset-password`, data);
   }
+
+  updateUser(data: { name: string }): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update`, data, {
+      withCredentials: true,
+    });
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/logout`,
+      {},
+      { withCredentials: true }
+    );
+  }
 }

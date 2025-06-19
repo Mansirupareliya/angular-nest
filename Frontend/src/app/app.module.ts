@@ -12,12 +12,20 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
     ResetpasswordComponent,
+    HomeComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +35,9 @@ import { ButtonModule } from 'primeng/button';
     PasswordModule,
     ButtonModule,
     InputTextModule,
+    ToastModule,
+    DialogModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
