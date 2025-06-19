@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { SignUpDto } from '../dto/signup.dto';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../dto/login.dto';
@@ -6,6 +6,8 @@ import { Auth } from '../decorator/auth.decorator';
 import { AuthType } from '../enum/auth-type.enum';
 import { Response } from '@nestjs/common';
 import { ResetPasswordDto } from '../dto/resetpassword.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { User } from '../decorator/user.decorator.';
 
 @Controller('api/user')
 export class AuthController {
@@ -37,5 +39,11 @@ export class AuthController {
   public logout(@Response({passthrough:true})res){
     res.clearCookie('access_token');
     return {message : 'user logged out successfully'};
+  }
+
+  @Put('update')
+  @Auth(AuthType.Bearer)
+  public update(@User() user, @Body() updatedto: UpdateUserDto){
+    return this.authService.updateUser(user,updatedto);
   }
 }

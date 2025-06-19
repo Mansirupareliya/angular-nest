@@ -8,6 +8,7 @@ import { AuthController } from './controller/auth.controller';
 import { GenerateTokenProvider } from './services/generate-token.provider';
 import { HashingProvider } from './services/hashing.provider';
 import { AuthService } from './services/auth.service';
+import { UserRepository } from './repository/user.repository';
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
@@ -15,6 +16,11 @@ import { AuthService } from './services/auth.service';
     JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
   controllers: [AuthController],
-  providers: [GenerateTokenProvider, HashingProvider, AuthService],
+  providers: [
+    GenerateTokenProvider,
+    HashingProvider,
+    AuthService,
+    UserRepository,
+  ],
 })
 export class AuthModule {}

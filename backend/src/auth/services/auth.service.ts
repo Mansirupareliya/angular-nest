@@ -1,25 +1,26 @@
 import {
   BadRequestException,
   Injectable,
-  RequestTimeoutException,
   NotFoundException,
   UnauthorizedException,
   InternalServerErrorException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../entity/user.entity';
+import { User} from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { SignUpDto } from '../dto/signup.dto';
 import { HashingProvider } from './hashing.provider';
 import { GenerateTokenProvider } from './generate-token.provider';
 import { LoginDto } from '../dto/login.dto';
 import { ResetPasswordDto } from '../dto/resetpassword.dto';
-
+import {  UpdateUserDto } from '../dto/update-user.dto';
+import { User as user } from '../decorator/user.decorator.';
+import { UserRepository } from '../repository/user.repository';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    
+    private readonly userRepository: UserRepository,
 
     private readonly hashingProvider: HashingProvider,
 
@@ -93,5 +94,23 @@ export class AuthService {
     await this.userRepository.save(user);
 
     return {message : 'password updated successfully'};
+  }
+
+  public async updateUser(user,updateUserDto: UpdateUserDto){
+
+    try{
+      const existingUser = await this.userRepository.getByEmail(user.email);
+
+      if(!existingUser){
+        throw new BadRequestException('user not found');
+      }
+      existingUser.name = updateUserDto.name??existingUser.name;
+
+      return await this.userRepository.save (existingUser);
+    }
+    catch{
+      throw new InternalServerErrorException('update failed');
+    }
+
   }
 }
