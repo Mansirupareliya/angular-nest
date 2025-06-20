@@ -1,4 +1,4 @@
-import { IsString, Matches, MinLength } from 'class-validator';
+import { IsNumber,Min, Max, IsString, Matches, MinLength } from 'class-validator';
 
 export class SignUpDto {
   @IsString()
@@ -15,4 +15,8 @@ export class SignUpDto {
   })
   password: string;
 
+  @IsNumber()
+  @Min(1000000000, { message: 'co_number must be a 10-digit number' })  
+  @Max(9999999999, { message: 'co_number must be a 10-digit number' })  
+  co_number: number;
 }
