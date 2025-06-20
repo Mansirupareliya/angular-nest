@@ -19,7 +19,9 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
   login(data: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, data);
+    return this.http.post(`${this.baseUrl}/login`, data, {
+      withCredentials: true,
+    });
   }
 
   resetPassword(data: {
@@ -42,5 +44,15 @@ export class AuthService {
       {},
       { withCredentials: true }
     );
+  }
+
+  getUser(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/featch`, { withCredentials: true });
+  }
+
+  deleteUser(): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/remove`, {
+      withCredentials: true,
+    });
   }
 }

@@ -1,26 +1,44 @@
 <div class="layout-container">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">👜 MyApp</div>
-    <nav>
-      <a routerLink="/" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/" routerLinkActive="active">Profile</a>
-      <a routerLink="/" routerLinkActive="active">Settings</a>
-    </nav>
-  </aside>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1neaGV6ku3m5H_BTwtOPiGEJUqF9J1gwCLlrFaFXoOxxwf1yeR8NLCSnC655o5nQxGKc&usqp=CAU"
+                alt="Logo" />
+        </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <!-- Header -->
-    <header class="header">
-      <div class="user-info">
-        Welcome, <strong>{{ userName }}</strong>
-      </div>
-    </header>
+        <nav class="nav-buttons">
+            <button routerLink="/dashboard" routerLinkActive="active">
+                <i class="pi pi-home"></i>
+                <span>Dashboard</span>
+            </button>
 
-    <!-- Router Content -->
-    <!-- <main class="page-content">
-      <router-outlet></router-outlet>
-    </main> -->
-  </div>
+            <button routerLink="/dashboard/profile" routerLinkActive="active">
+                <i class="pi pi-user"></i>
+                <span>Profile</span>
+            </button>
+
+            <button routerLink="/dashboard/settings" routerLinkActive="active">
+                <i class="pi pi-cog"></i>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="user-section">
+                <span class="user-name"> Welcome, <strong>{{ userName }}</strong></span>
+                <button class="logout-btn" (click)="logout()">
+                    <i class="pi pi-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="page-content">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
 </div>

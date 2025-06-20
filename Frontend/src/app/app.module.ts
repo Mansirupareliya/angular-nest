@@ -16,6 +16,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './layout/layout.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { LayoutComponent } from './layout/layout.component';
     ResetpasswordComponent,
     NavbarComponent,
     LayoutComponent,
+    ProfileComponent,
+    DialogBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as session from 'express-session';
 import * as cookieParser from 'cookie-parser';
+import * as passport from 'passport';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
@@ -31,6 +32,8 @@ async function bootstrap() {
       cookie: { secure: false }, // Set `true` if using HTTPS
     }),
   );
+  app.use(passport.initialize());
+  app.use(passport.session());
   await app.listen(3000);
 }
 bootstrap();

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -6,22 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  userName = 'Guest'; // default
+  userName = 'Guest';
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    const userCookie = this.getCookie('name');
-    if (userCookie) {
-      try {
-        const user = JSON.parse(decodeURIComponent(userCookie));
-        this.userName = user.name || 'Guest';
-      } catch (e) {
-        console.error('Error parsing user cookie:', e);
-      }
-    }
+    this.authService.getUser().subscribe({
+      next: (user) => (this.userName = user.name),
+      error: () => (this.userName = 'Guest'),
+    });
   }
 
-  getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return match ? match[2] : null;
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }

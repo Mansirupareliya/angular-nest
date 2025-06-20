@@ -12,7 +12,6 @@ import { LoginDto } from '../dto/login.dto';
 import { ResetPasswordDto } from '../dto/resetpassword.dto';
 import {  UpdateUserDto } from '../dto/update-user.dto';
 import { UserRepository } from '../repository/user.repository';
-import { promises } from 'fs';
 import { User } from '../entity/user.entity';
 @Injectable()
 export class AuthService {
