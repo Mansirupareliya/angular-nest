@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
   {
@@ -18,9 +18,14 @@ const routes: Routes = [
     path: 'reset-password',
     component: ResetpasswordComponent,
   },
-  {
-    path: 'home',
-    component: HomeComponent,
+   {
+    path: 'dashboard',
+    component: LayoutComponent,
+    // children: [
+    //   { path: 'dashboard', component: DashboardComponent },
+    //   { path: 'profile', component: ProfileComponent },
+    //   { path: 'settings', component: SettingsComponent },
+    // ],
   },
 ];
 

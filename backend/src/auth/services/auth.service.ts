@@ -12,6 +12,8 @@ import { LoginDto } from '../dto/login.dto';
 import { ResetPasswordDto } from '../dto/resetpassword.dto';
 import {  UpdateUserDto } from '../dto/update-user.dto';
 import { UserRepository } from '../repository/user.repository';
+import { promises } from 'fs';
+import { User } from '../entity/user.entity';
 @Injectable()
 export class AuthService {
   constructor(
@@ -117,5 +119,18 @@ export class AuthService {
       }
       await this.userRepository.delete(user.sub);
    
+  }
+
+  public async getUserById(user):Promise<User>{
+    try{
+      const existingUser = await this.userRepository.getById(user.sub);
+      if(!existingUser){
+        throw new NotFoundException('User not found');
+      }
+       return existingUser;
+    }
+   catch(error){
+    throw new InternalServerErrorException('Failed to get user');
+   }
   }
 }

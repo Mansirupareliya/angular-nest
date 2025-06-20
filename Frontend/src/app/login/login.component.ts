@@ -20,7 +20,7 @@ export class LoginComponent {
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken); 
         alert('Login successful!');
-        this.router.navigate(['/home'])
+        this.router.navigate(['/dashboard'])
       } else {
         alert('Login failed: Token not found');
       }

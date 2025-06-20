@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put } from '@nestjs/common';
+import { Body, Controller, Post, Put, Get, Delete } from '@nestjs/common';
 import { SignUpDto } from '../dto/signup.dto';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from '../dto/login.dto';
@@ -46,4 +46,17 @@ export class AuthController {
   public update(@User() user, @Body() updatedto: UpdateUserDto){
     return this.authService.updateUser(user,updatedto);
   }
+
+  @Delete('remove')
+  public delete(@User() user){
+    this.authService.remove(user);
+    return {message : 'User deleted successfully'};
+  }
+
+  @Get('featch')
+  public getUser(@User() user){
+    return this.authService.getUserById(user);
+  }
+
+  
 }
