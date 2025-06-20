@@ -109,4 +109,13 @@ export class AuthService {
     }
 
   }
+  public async remove(user):Promise<void>{
+    
+      const existingUser = await this.userRepository.getById(user.sub);
+      if(!existingUser){
+        throw new NotFoundException('User not found');
+      }
+      await this.userRepository.delete(user.sub);
+   
+  }
 }
