@@ -10,12 +10,12 @@ export class SignupComponent {
   name = '';
   email = '';
   password = '';
-
+  contact='';
   constructor(private authService: AuthService, private router : Router) {}
 
   onSignup() {
     console.log( "signup successfully" );
-    this.authService.signup({ name: this.name, email: this.email, password: this.password })
+    this.authService.signup({ name: this.name, email: this.email, password: this.password , co_number:Number(this.contact)})
       .subscribe({
         next: (res) => {
           alert('Signup successful');

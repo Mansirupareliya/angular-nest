@@ -6,8 +6,10 @@
 
     <input pInputText type="text" [(ngModel)]="name" placeholder="Name" name="name" required />
     <input pInputText type="email" [(ngModel)]="email" placeholder="Email" name="email" required />
-    <p-password [(ngModel)]="password" placeholder="Password" name="password" toggleMask="true" feedback="false" required></p-password>
-
+    <p-password [(ngModel)]="password" placeholder="Password" name="password" toggleMask="true" feedback="false"
+      required></p-password>
+    <input pInputText type="tel" [(ngModel)]="contact" placeholder="Contact Number" name="contact" pattern="[0-9]{10}"
+      maxlength="10" required />
     <button pButton type="submit" label="Sign Up" class="p-button-primary"></button>
 
     <p>
