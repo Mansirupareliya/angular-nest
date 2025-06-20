@@ -10,7 +10,14 @@
       required></p-password>
     <input pInputText type="tel" [(ngModel)]="contact" placeholder="Contact Number" name="contact" pattern="[0-9]{10}"
       maxlength="10" required />
-    <button pButton type="submit" label="Sign Up" class="p-button-primary"></button>
+
+    <button pButton type="submit" label="Submit" class="p-button-primary"></button>
+    <button pButton type="button" label="Cancel" class="p-button-secondary" (click)="onCancel()"></button>
+
+    <p-dialog header="Success" [(visible)]="showDialog" [modal]="true" [closable]="false">
+      <p>Congratulation you have completed successfully regestration back to the login !</p>
+      <button pButton label="OK" (click)="closeDialog()"></button>
+    </p-dialog>
 
     <p>
       Already have an account?

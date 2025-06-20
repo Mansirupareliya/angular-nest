@@ -11,20 +11,41 @@ export class SignupComponent {
   email = '';
   password = '';
   contact='';
+  showDialog = false; 
+
   constructor(private authService: AuthService, private router : Router) {}
 
   onSignup() {
-    console.log( "signup successfully" );
-    this.authService.signup({ name: this.name, email: this.email, password: this.password , co_number:Number(this.contact)})
+    this.authService
+      .signup({
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        co_number: Number(this.contact),
+      })
       .subscribe({
-        next: (res) => {
-          alert('Signup successful');
-          this.router.navigate(['/login'])
+        next: () => {
+          this.showDialog = true; 
         },
         error: (err) => {
-          alert('Signup failed: ' + (err.error?.message?.join(', ') || 'Unknown error'));
+          alert(
+            'Signup failed: ' +
+              (err.error?.message?.join(', ') || 'Unknown error')
+          );
           console.error(err);
         }
       });
+  }
+
+  closeDialog() {
+    this.showDialog = false;
+    this.router.navigate(['/login']);
+  }
+
+  onCancel() {
+    this.name = '';
+    this.email = '';
+    this.password = '';
+    this.contact = '';
   }
 }
